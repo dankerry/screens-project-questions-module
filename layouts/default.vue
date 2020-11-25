@@ -2,7 +2,7 @@
   <div id="starter-outer">
     <TheHeader />
     <Nuxt />
-    <TheFooter />
+    <!-- <TheFooter /> -->
   </div>
 </template>
 

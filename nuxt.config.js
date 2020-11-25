@@ -1,11 +1,16 @@
 import { join } from "path";
 
 export default {
+  ssr: false,
   /*
    ** Nuxt target
    ** See https://nuxtjs.org/api/configuration-target
    */
-  target: "server",
+  target: "static",
+  
+  // router: {
+  //   base: '/details/'
+  // },
 
   /*
    ** Headers of the page
