@@ -494,13 +494,11 @@ p {
 
 section {
   padding-top: 260px !important;
-  height: 80vh;
 }
 
 @media (max-width: 450px) {
   section {
     padding-top: 180px !important;
-    height: unset;
   }
 }
 
