@@ -47,8 +47,16 @@ export default {
 
 <style scoped>
 section {
-    padding-top: 15rem !important;
+    padding-top: 260px !important;
 }
+
+
+@media (max-width: 450px) {
+  section {
+    padding-top: 180px !important;
+  }
+}
+
 
 input {
   border: none;
@@ -74,7 +82,18 @@ label {
   font-weight: unset;
 }
 
-button {
+.button.is-light {
   min-width: unset !important;
+  transition: all .3s ease 0s;
+}
+
+.button.is-light:focus,
+.button.is-light:active {
+  background-color: #a5ffc9 !important;
+}
+
+.button.is-light:hover {
+  box-shadow: 3px 4px 7px rgba(0, 0, 0, 0.21);
+  transform: translateY(-2px);
 }
 </style>

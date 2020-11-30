@@ -1,4 +1,5 @@
 import { join } from "path";
+import webpack from 'webpack';
 
 export default {
   ssr: false,
@@ -107,7 +108,13 @@ export default {
         }
       }
     },
-    transpile: ["vee-validate/dist/rules"]
+    transpile: ["vee-validate/dist/rules"],
+    plugins: [
+      new webpack.ProvidePlugin({
+        // global modules
+        _: "lodash"
+      })
+    ]
   },
 
   server: {
