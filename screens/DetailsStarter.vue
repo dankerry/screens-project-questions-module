@@ -496,6 +496,12 @@ section {
   padding-top: 260px !important;
 }
 
+@media (min-width: 990px) {
+  section {
+    height: 90vh !important;
+  }
+}
+
 @media (max-width: 450px) {
   section {
     padding-top: 180px !important;
