@@ -48,6 +48,7 @@ export default {
 <style scoped>
 section {
     padding-top: 260px !important;
+    padding-bottom: 260px !important;
 }
 
 

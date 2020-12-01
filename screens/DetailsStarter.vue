@@ -514,6 +514,7 @@ p {
 
 section {
   padding-top: 260px !important;
+  padding-bottom: 260px !important;
 }
 
 /*@media (min-width: 990px) {
@@ -522,11 +523,11 @@ section {
   }
 }*/
 
-@media (max-width: 450px) {
+/*@media (max-width: 450px) {
   section {
     padding-top: 180px !important;
   }
-}
+}*/
 
 .title-box {
   border: 1px solid #d6d6d6;
