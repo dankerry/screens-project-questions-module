@@ -51,12 +51,6 @@ section {
 }
 
 
-@media (max-width: 450px) {
-  section {
-    padding-top: 180px !important;
-  }
-}
-
 
 input {
   border: none;
