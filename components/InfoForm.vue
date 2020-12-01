@@ -48,9 +48,19 @@ export default {
 <style scoped>
 section {
     padding-top: 260px !important;
-    padding-bottom: 260px !important;
 }
 
+@media (max-width: 450px) {
+  section {
+    padding-top: 230px !important;
+  }
+}
+
+@media (max-width: 320px) {
+  section {
+    padding-top: 200px !important;
+  }
+}
 
 
 input {

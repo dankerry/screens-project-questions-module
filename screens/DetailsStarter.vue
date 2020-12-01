@@ -9,7 +9,7 @@
 
     <div class="container">
       <div class="columns is-vcentered is-centered">
-        <div class="column is-9">
+        <div class="column is-12">
           <transition name="fade">
         <!-- Show form  -->
         <InfoForm v-if="!isShowingQuestion" key="visible" @displayQuestions="showQuestions($event)" />
@@ -514,7 +514,6 @@ p {
 
 section {
   padding-top: 260px !important;
-  padding-bottom: 260px !important;
 }
 
 /*@media (min-width: 990px) {
@@ -523,11 +522,18 @@ section {
   }
 }*/
 
-/*@media (max-width: 450px) {
+@media (max-width: 450px) {
   section {
-    padding-top: 180px !important;
+    padding-top: 200px !important;
   }
-}*/
+}
+
+
+@media (max-width: 360px) {
+  section {
+    padding-top: 140px !important;
+  }
+}
 
 .title-box {
   border: 1px solid #d6d6d6;
