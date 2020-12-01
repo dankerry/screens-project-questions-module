@@ -39,7 +39,7 @@ export default {
     methods: {
         // display the first question
         showQuestions() {
-            this.$emit("displayQuestions", true);
+            this.$emit("displayQuestions", { displayStatus: true, name: this.name });
         }
     }
 }

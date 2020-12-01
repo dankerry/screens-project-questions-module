@@ -1,8 +1,16 @@
 <template>
   <!-- questions section -->
   <div id="questions">
+    <!-- Cancel button -->
+    <div class="scroll-top" style="display: block;">
+      <span @click="cancel">&#215;</span>
+    </div>
+    <!-- End cancel button -->
+
     <div class="container">
-      <transition name="fade">
+      <div class="columns is-vcentered is-centered">
+        <div class="column is-9">
+          <transition name="fade">
         <!-- Show form  -->
         <InfoForm v-if="!isShowingQuestion" key="visible" @displayQuestions="showQuestions($event)" />
         <!-- Show when on the first question -->
@@ -184,7 +192,7 @@
               <div class="columns is-8-desktop is-variable is-multiline pt-4">
                 <div class="column is-12-desktop is-12-tablet is-12-mobile">
                   <div class="py-5">
-                    <p class="is-size-6">Here is your result:</p>
+                    <p class="is-size-6">{{ name }}, here is your result:</p>
                   </div>
                   <div class="py-5">
                     <p class="is-size-6">{{ option }}</p>
@@ -220,16 +228,9 @@
           </div>
         </section>
       </transition>
+        </div>
+      </div>
     </div>
-    <!-- Questions navigator -->
-    <div class="scroll-top" style="display: block;">
-      <span>
-        Youreadfor.me
-      </span>
-      <i @click="scrollUp" class="fas fa-angle-up"></i>
-      <i @click="scrollDown" class="fas fa-angle-down"></i>
-    </div>
-    <!-- End questions navigator -->
   </div>
   <!-- end questions sections -->
 </template>
@@ -259,6 +260,8 @@ export default {
       linkText: "",
 
       location: "",
+
+      name: "",
 
       // shows info form when false
       isShowingQuestion: false,
@@ -402,9 +405,10 @@ export default {
     },
 
     // display the first question
-    showQuestions(value) {
-      this.isShowingQuestion = value; // "value being true"
+    showQuestions({displayStatus, name}) {
+      this.isShowingQuestion = displayStatus; // "value being true"
       this.firstQuestion = true;
+      this.name = name;
     },
 
     // scroll up through the questions
@@ -456,6 +460,9 @@ export default {
         } else if (this.thirdQuestion) {
           this.thirdQuestion = false;
           this.isShowingQuestion = false;
+        } else if (this.viewResult) {
+          this.viewResult = false;
+          this.isShowingQuestion = false;
         }
         console.log("times");
       } else if (e.deltaY > 0) {
@@ -471,8 +478,21 @@ export default {
         } else if (!this.isShowingQuestion) {
           this.thirdQuestion = true;
           this.isShowingQuestion = true;
+        } else if (this.viewResult) {
+          this.viewResult = false;
+          this.thirdQuestion = true;
         }
       }
+    },
+
+    cancel () {
+      console.log("go back");
+      this.isShowingQuestion = false;
+      this.firstQuestion = false;
+      this.secondQuestion = false;
+      this.thirdQuestion = false;
+      this.copyright = false;
+      this.viewResult = false;
     }
   },
 
@@ -496,11 +516,11 @@ section {
   padding-top: 260px !important;
 }
 
-@media (min-width: 990px) {
+/*@media (min-width: 990px) {
   section {
     height: 90vh !important;
   }
-}
+}*/
 
 @media (max-width: 450px) {
   section {
@@ -548,33 +568,44 @@ section {
 }
 
 .scroll-top {
-  padding-left: 10px;
-  padding-right: 10px;
+  /*padding-left: 10px;
+  padding-right: 10px;*/
   min-width: 40px;
   height: 40px;
   line-height: 44px;
   position: fixed;
-  right: 20px;
-  bottom: 20px;
+  right: 50px;
+  top: 50px;
   z-index: 999;
-  font-size: 12px;
+  font-size: 15px;
   color: #fff;
   text-align: center;
   text-decoration: none;
   display: none;
-  background: #000000;
-  border-radius: 3px;
-  -webkit-box-shadow: 0 2px 15px rgba(0, 0, 0, 0.25);
-  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.25);
+  /*background: #000000;*/
+  /*border-radius: 3px;*/
+  /*-webkit-box-shadow: 0 2px 15px rgba(0, 0, 0, 0.25);*/
+  /*box-shadow: 0 2px 15px rgba(0, 0, 0, 0.25);*/
   -webkit-transition: .2s ease-in-out;
   -o-transition: .2s ease-in-out;
   transition: .2s ease-in-out;
 }
 
-.fa-angle-down,
-.fa-angle-up {
-  margin-left: 10px;
+.scroll-top span {
+  color: #777; 
+  font-size: 40px; 
+  font-weight: 100;
   cursor: pointer;
+}
+
+.scroll-top:hover {
+  transform: rotateZ(90deg);
+}
+
+@media (max-width: 766px) {
+  .scroll-top {
+    right: 20px;
+  }
 }
 
 </style>
