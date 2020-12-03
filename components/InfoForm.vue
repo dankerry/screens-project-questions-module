@@ -46,7 +46,7 @@ export default {
 </script>
 
 <style scoped>
-section {
+/* section {
     padding-top: 260px !important;
 }
 
@@ -61,7 +61,7 @@ section {
     padding-top: 200px !important;
   }
 }
-
+*/
 
 input {
   border: none;

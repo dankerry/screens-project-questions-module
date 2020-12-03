@@ -12,6 +12,7 @@ const components = { DetailsStarter };
 // }
 
 export default {
+  layout: 'questions',
   name,
   components
   // asyncData

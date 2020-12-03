@@ -1,235 +1,243 @@
 <template>
   <!-- questions section -->
-  <div id="questions">
-    <!-- Cancel button -->
-    <div class="scroll-top" style="display: block;">
-      <span @click="cancel">&#215;</span>
-    </div>
-    <!-- End cancel button -->
-
-    <div class="container">
-      <div class="columns is-vcentered is-centered">
-        <div class="column is-12">
-          <transition name="fade">
-        <!-- Show form  -->
-        <InfoForm v-if="!isShowingQuestion" key="visible" @displayQuestions="showQuestions($event)" />
-        <!-- Show when on the first question -->
-        <section v-else-if="firstQuestion" key="notVisible" class="section">
-          <div class="columns is-centered">
-            <div class="column is-5">
-              <div class="columns is-8-desktop is-variable is-multiline pt-4">
-                <div class="column is-12-desktop is-12-tablet is-12-mobile">
-                  <div class="py-5">
-                    <p class="is-size-6">{{ questions[0].question }}</p>
+  <div id="questions" class="columns is-vcentered is-mobile">
+    <div class="column is-12">
+      <!-- Cancel button -->
+      <div class="scroll-top" style="display: block;">
+        <span @click="cancel">&#215;</span>
+      </div>
+      <!-- End cancel button -->
+      <div class="container">
+        <!-- <div class="columns is-vcentered is-centered"> -->
+        <!-- <div class="column is-12"> -->
+        <transition name="fade">
+          <!-- Show form  -->
+          <InfoForm v-if="!isShowingQuestion" key="visible" @displayQuestions="showQuestions($event)" />
+          <!-- Show when on the first question -->
+          <section v-else-if="firstQuestion" key="notVisible" class="section">
+            <div class="columns is-centered">
+              <div class="column is-5">
+                <div class="columns is-8-desktop is-variable is-multiline pt-4">
+                  <div class="column is-12-desktop is-12-tablet is-12-mobile">
+                    <div class="py-5">
+                      <p class="is-size-6">{{ questions[0].question }}</p>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="columns">
-                <div class="column is-6-desktop is-hidden-mobile">
-                  <button @click="firstAnswer(questions[0].question, 'yes')" class="button is-success is-outlined is-light">
-                    Yes
-                  </button>
-                </div>
-                <div class="column is-6-desktop is-hidden-mobile">
-                  <button @click="firstAnswer(questions[0].question, 'no')" class="button is-success is-outlined is-light">
-                    No
-                  </button>
-                </div>
-              </div>
-              <!-- Buttons on mobile -->
-              <div class="columns pt-4 is-hidden-desktop is-hidden-tablet">
-                <div class="column">
-                  <button @click="firstAnswer(questions[0].question, 'yes')" class="button is-success is-outlined is-light">
-                    Yes
-                  </button>
-                </div>
-                <div class="column">
-                  <button @click="firstAnswer(questions[0].question, 'no')" class="button is-success is-outlined is-light">
-                    No
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-        <!-- End first question -->
-        <!-- Show when on the second question -->
-        <section v-else-if="secondQuestion" key="invisible" class="section">
-          <div class="columns is-centered">
-            <div class="column is-5">
-              <div class="columns is-8-desktop is-variable is-multiline pt-4">
-                <div class="column is-12-desktop is-12-tablet is-12-mobile">
-                  <div class="py-5">
-                    <p class="is-size-6">{{ questions[1].question }}</p>
+                <div class="columns">
+                  <div class="column is-6-desktop is-hidden-mobile">
+                    <button @click="firstAnswer(questions[0].question, 'yes')" class="button is-success is-outlined is-light">
+                      Yes
+                    </button>
                   </div>
-                </div>
-              </div>
-              <div class="columns">
-                <div class="column is-2-desktop is-hidden-mobile">
-                  <button @click="secondAnswer(questions[1].question, 'yes')" class="button is-success is-outlined is-light">
-                    Yes
-                  </button>
-                </div>
-                <div class="column is-2-desktop is-hidden-mobile">
-                  <button @click="secondAnswer(questions[1].question, 'no')" class="button is-success is-outlined is-light">
-                    no
-                  </button>
-                </div>
-                <div class="column is-3-desktop is-hidden-mobile">
-                  <button @click="goToCopyright" class="button is-success is-outlined is-light">
-                    What is a copyright?
-                  </button>
+                  <div class="column is-6-desktop is-hidden-mobile">
+                    <button @click="firstAnswer(questions[0].question, 'no')" class="button is-success is-outlined is-light">
+                      No
+                    </button>
+                  </div>
                 </div>
                 <!-- Buttons on mobile -->
                 <div class="columns pt-4 is-hidden-desktop is-hidden-tablet">
                   <div class="column">
-                    <button @click="secondAnswer(questions[1].question, 'yes')" class="button is-success is-outlined is-light">
+                    <button @click="firstAnswer(questions[0].question, 'yes')" class="button is-success is-outlined is-light">
                       Yes
                     </button>
                   </div>
                   <div class="column">
-                    <button @click="secondAnswer(questions[1].question, 'no')" class="button is-success is-outlined is-light">
+                    <button @click="firstAnswer(questions[0].question, 'no')" class="button is-success is-outlined is-light">
                       No
                     </button>
                   </div>
-                  <!-- show when on question 2 on mobile -->
-                  <div class="column">
+                </div>
+              </div>
+            </div>
+          </section>
+          <!-- End first question -->
+          <!-- Show when on the second question -->
+          <section v-else-if="secondQuestion" key="invisible" class="section">
+            <div class="columns is-centered">
+              <div class="column is-5">
+                <div class="columns is-8-desktop is-variable is-multiline pt-4">
+                  <div class="column is-12-desktop is-12-tablet is-12-mobile">
+                    <div class="py-5">
+                      <p class="is-size-6">{{ questions[1].question }}</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="columns">
+                  <div class="column is-2-desktop is-hidden-mobile">
+                    <button @click="secondAnswer(questions[1].question, 'yes')" class="button is-success is-outlined is-light">
+                      Yes
+                    </button>
+                  </div>
+                  <div class="column is-2-desktop is-hidden-mobile">
+                    <button @click="secondAnswer(questions[1].question, 'no')" class="button is-success is-outlined is-light">
+                      no
+                    </button>
+                  </div>
+                  <div class="column is-3-desktop is-hidden-mobile">
                     <button @click="goToCopyright" class="button is-success is-outlined is-light">
                       What is a copyright?
                     </button>
                   </div>
-                  <!-- end "show when on question 2 on mobile" -->
+                  <!-- Buttons on mobile -->
+                  <div class="columns pt-4 is-hidden-desktop is-hidden-tablet">
+                    <div class="column">
+                      <button @click="secondAnswer(questions[1].question, 'yes')" class="button is-success is-outlined is-light">
+                        Yes
+                      </button>
+                    </div>
+                    <div class="column">
+                      <button @click="secondAnswer(questions[1].question, 'no')" class="button is-success is-outlined is-light">
+                        No
+                      </button>
+                    </div>
+                    <!-- show when on question 2 on mobile -->
+                    <div class="column">
+                      <button @click="goToCopyright" class="button is-success is-outlined is-light">
+                        What is a copyright?
+                      </button>
+                    </div>
+                    <!-- end "show when on question 2 on mobile" -->
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </section>
-        <!-- End second question -->
-        <section v-else-if="copyright" key="in-visible" class="section">
-          <div class="columns is-centered">
-            <div class="column is-5">
-              <div class="columns is-8-desktop is-variable is-multiline pt-4">
-                <div class="column is-12-desktop is-12-tablet is-12-mobile">
-                  <div class="py-5">
-                    <p class="is-size-6">What is a copyright?</p>
+          </section>
+          <!-- End second question -->
+          <section v-else-if="copyright" key="in-visible" class="section">
+            <div class="columns is-centered">
+              <div class="column is-5">
+                <div class="columns is-8-desktop is-variable is-multiline pt-4">
+                  <div class="column is-12-desktop is-12-tablet is-12-mobile">
+                    <div class="py-5">
+                      <p class="is-size-6">What is a copyright?</p>
+                    </div>
+                    <div class="py-5">
+                      <p class="is-size-6">If you create a deed you are allowed to use, change, edit, sell and resell it. Sometimes copyrights are sold. If you do not have it, an artist, author or publisher can revoke the right to create Demand, NEWV or Spotlights.</p>
+                    </div>
                   </div>
-                  <div class="py-5">
-                    <p class="is-size-6">If you create a deed you are allowed to use, change, edit, sell and resell it. Sometimes copyrights are sold. If you do not have it, an artist, author or publisher can revoke the right to create Demand, NEWV or Spotlights.</p>
-                  </div>
                 </div>
-              </div>
-              <div class="columns">
-                <div class="column is-6-desktop is-hidden-mobile">
-                  <button @click="copyrightAnswer('yes')" class="button is-success is-outlined is-light">
-                    I have the copyright
-                  </button>
-                </div>
-                <div class="column is-6-desktop is-hidden-mobile">
-                  <button @click="copyrightAnswer('no')" class="button is-success is-outlined is-light">
-                    I don't have it
-                  </button>
-                </div>
-                <!-- Buttons on mobile -->
-                <div class="columns pt-4 is-hidden-desktop is-hidden-tablet">
-                  <div class="column">
+                <div class="columns">
+                  <div class="column is-6-desktop is-hidden-mobile">
                     <button @click="copyrightAnswer('yes')" class="button is-success is-outlined is-light">
                       I have the copyright
                     </button>
                   </div>
-                  <div class="column">
+                  <div class="column is-6-desktop is-hidden-mobile">
                     <button @click="copyrightAnswer('no')" class="button is-success is-outlined is-light">
                       I don't have it
                     </button>
                   </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-        <!-- Show when on the third question -->
-        <section v-else-if="thirdQuestion" key="unvisible" class="section">
-          <div class="columns is-centered">
-            <div class="column is-5">
-              <div class="columns is-8-desktop is-variable is-multiline pt-4">
-                <div class="column is-12-desktop is-12-tablet is-12-mobile">
-                  <div class="py-5">
-                    <p class="is-size-6">{{ questions[2].question }}</p>
+                  <!-- Buttons on mobile -->
+                  <div class="columns pt-4 is-hidden-desktop is-hidden-tablet">
+                    <div class="column">
+                      <button @click="copyrightAnswer('yes')" class="button is-success is-outlined is-light">
+                        I have the copyright
+                      </button>
+                    </div>
+                    <div class="column">
+                      <button @click="copyrightAnswer('no')" class="button is-success is-outlined is-light">
+                        I don't have it
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
-              <div class="columns">
-                <div class="column is-6-desktop is-hidden-mobile">
-                  <button @click="thirdAnswer('pick a reader')" class="button is-success is-outlined is-light">
-                    Pick a readr
-                  </button>
+            </div>
+          </section>
+          <!-- Show when on the third question -->
+          <section v-else-if="thirdQuestion" key="unvisible" class="section">
+            <div class="columns is-centered">
+              <div class="column is-5">
+                <div class="columns is-8-desktop is-variable is-multiline pt-4">
+                  <div class="column is-12-desktop is-12-tablet is-12-mobile">
+                    <div class="py-5">
+                      <p class="is-size-6">{{ questions[2].question }}</p>
+                    </div>
+                  </div>
                 </div>
-                <div class="column is-6-desktop is-hidden-mobile">
-                  <button @click="thirdAnswer('read it myself')" class="button is-success is-outlined is-light">
-                    Read it myself
-                  </button>
-                </div>
-                <!-- Buttons on mobile -->
-                <div class="columns pt-4 is-hidden-desktop is-hidden-tablet">
-                  <div class="column">
+                <div class="columns">
+                  <div class="column is-6-desktop is-hidden-mobile">
                     <button @click="thirdAnswer('pick a reader')" class="button is-success is-outlined is-light">
                       Pick a readr
                     </button>
                   </div>
-                  <div class="column">
+                  <div class="column is-6-desktop is-hidden-mobile">
                     <button @click="thirdAnswer('read it myself')" class="button is-success is-outlined is-light">
                       Read it myself
                     </button>
                   </div>
+                  <!-- Buttons on mobile -->
+                  <div class="columns pt-4 is-hidden-desktop is-hidden-tablet">
+                    <div class="column">
+                      <button @click="thirdAnswer('pick a reader')" class="button is-success is-outlined is-light">
+                        Pick a readr
+                      </button>
+                    </div>
+                    <div class="column">
+                      <button @click="thirdAnswer('read it myself')" class="button is-success is-outlined is-light">
+                        Read it myself
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </section>
-        <!-- End third question -->
-        <section v-else-if="viewResult" key="un-visible" class="section">
-          <div class="columns is-centered">
-            <div class="column is-5">
-              <div class="columns is-8-desktop is-variable is-multiline pt-4">
-                <div class="column is-12-desktop is-12-tablet is-12-mobile">
-                  <div class="py-5">
-                    <p class="is-size-6">{{ name }}, here is your result:</p>
+          </section>
+          <!-- End third question -->
+          <section v-else-if="viewResult" key="un-visible" class="section">
+            <div class="columns is-centered">
+              <div class="column is-5">
+                <div class="columns is-8-desktop is-variable is-multiline pt-4">
+                  <div class="column is-12-desktop is-12-tablet is-12-mobile">
+                    <div class="py-5">
+                      <p class="is-size-6">{{ name }}, here is your result:</p>
+                    </div>
+                    <div class="py-5">
+                      <p class="is-size-6">{{ option }}</p>
+                    </div>
                   </div>
-                  <div class="py-5">
-                    <p class="is-size-6">{{ option }}</p>
-                  </div>
                 </div>
-              </div>
-              <div class="columns">
-                <div class="column is-6-desktop is-hidden-mobile">
-                  <a :href="location" class="button is-success is-outlined is-light">
-                    {{ linkText }}
-                  </a>
-                </div>
-                <div class="column is-6-desktop is-hidden-mobile">
-                  <a href="#" class="button is-success is-outlined is-light">
-                    Restart Assistant
-                  </a>
-                </div>
-                <!-- Buttons on mobile -->
-                <div class="columns pt-4 is-hidden-desktop is-hidden-tablet">
-                  <div class="column">
+                <div class="columns">
+                  <div class="column is-6-desktop is-hidden-mobile">
                     <a :href="location" class="button is-success is-outlined is-light">
                       {{ linkText }}
                     </a>
                   </div>
-                  <div class="column">
+                  <div class="column is-6-desktop is-hidden-mobile">
                     <a href="#" class="button is-success is-outlined is-light">
                       Restart Assistant
                     </a>
                   </div>
+                  <!-- Buttons on mobile -->
+                  <div class="columns pt-4 is-hidden-desktop is-hidden-tablet">
+                    <div class="column">
+                      <a :href="location" class="button is-success is-outlined is-light">
+                        {{ linkText }}
+                      </a>
+                    </div>
+                    <div class="column">
+                      <a href="#" class="button is-success is-outlined is-light">
+                        Restart Assistant
+                      </a>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </section>
-      </transition>
-        </div>
+          </section>
+        </transition>
+        <!-- </div> -->
+        <!-- </div> -->
       </div>
+      <!-- Cancel button -->
+      <div class="scroll-btn is-hidden-desktop" style="display: block;">
+        <span>Youreadfor.me</span>
+        <i @click="scrollUp" class="fas fa-angle-up"></i>
+        <i @click="scrollDown" class="fas fa-angle-down"></i>
+      </div>
+      <!-- End cancel button -->
     </div>
   </div>
   <!-- end questions sections -->
@@ -405,7 +413,7 @@ export default {
     },
 
     // display the first question
-    showQuestions({displayStatus, name}) {
+    showQuestions({ displayStatus, name }) {
       this.isShowingQuestion = displayStatus; // "value being true"
       this.firstQuestion = true;
       this.name = name;
@@ -485,7 +493,7 @@ export default {
       }
     },
 
-    cancel () {
+    cancel() {
       console.log("go back");
       this.isShowingQuestion = false;
       this.firstQuestion = false;
@@ -499,7 +507,6 @@ export default {
   mounted() {
     const questions = document.querySelector("#questions");
     questions.addEventListener("wheel", _.debounce(this.mouseScroll, 100));
-
   }
 };
 
@@ -512,9 +519,17 @@ p {
   font-family: "Mulish", sans-serif;
 }
 
-section {
-  padding-top: 260px !important;
+ #questions {
+  height: 100vh;
 }
+
+/* section {
+  height: 100vh;
+}*/
+
+/*section {
+  padding-top: 260px !important;
+}*/
 
 /*@media (min-width: 990px) {
   section {
@@ -522,7 +537,7 @@ section {
   }
 }*/
 
-@media (max-width: 450px) {
+/* @media (max-width: 450px) {
   section {
     padding-top: 200px !important;
   }
@@ -533,7 +548,7 @@ section {
   section {
     padding-top: 140px !important;
   }
-}
+}*/
 
 .title-box {
   border: 1px solid #d6d6d6;
@@ -556,7 +571,7 @@ section {
 }
 
 .fade-enter-active {
-  transition: all 1s ease;
+  transition: transform 3s 1s ease, opacity 2s 1s ease;
 }
 
 .button.is-success.is-light {
@@ -574,9 +589,36 @@ section {
   transform: translateY(-2px);
 }
 
+.fa-angle-up, .fa-angle-down {
+	margin-left: 10px;
+	cursor: pointer;
+}
+
+.scroll-btn {
+  padding-left: 10px;
+  padding-right: 10px;
+  min-width: 40px;
+  height: 40px;
+  line-height: 44px;
+  position: fixed;
+  right: 50px;
+  bottom: 10px;
+  z-index: 999;
+  font-size: 13px;
+  color: #fff;
+  text-align: center;
+  text-decoration: none;
+  display: none;
+  background: #000000;
+  border-radius: 3px;
+  -webkit-box-shadow: 0 2px 15px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.25);
+  -webkit-transition: .2s ease-in-out;
+  -o-transition: .2s ease-in-out;
+  transition: .2s ease-in-out;
+}
+
 .scroll-top {
-  /*padding-left: 10px;
-  padding-right: 10px;*/
   min-width: 40px;
   height: 40px;
   line-height: 44px;
@@ -589,18 +631,14 @@ section {
   text-align: center;
   text-decoration: none;
   display: none;
-  /*background: #000000;*/
-  /*border-radius: 3px;*/
-  /*-webkit-box-shadow: 0 2px 15px rgba(0, 0, 0, 0.25);*/
-  /*box-shadow: 0 2px 15px rgba(0, 0, 0, 0.25);*/
   -webkit-transition: .2s ease-in-out;
   -o-transition: .2s ease-in-out;
   transition: .2s ease-in-out;
 }
 
 .scroll-top span {
-  color: #777; 
-  font-size: 40px; 
+  color: #777;
+  font-size: 40px;
   font-weight: 100;
   cursor: pointer;
 }
