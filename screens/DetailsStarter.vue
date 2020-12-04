@@ -14,7 +14,7 @@
         <!-- Show form  -->
         <InfoForm :class="{ 'theform': true, 'form-isVisible': formIsVisible, 'form-invisible': formInvisible }" v-if="!isShowingQuestion" @displayQuestions="showQuestions($event)" />
         <!-- Show when on the first question -->
-        <section v-else-if="firstQuestion" :class="{ 'section': true, 'firstSection': true, 'show-on-scroll': true, 'is-visible': isVisible, 'invisible': invisible }">
+        <section v-else-if="firstQuestion" :class="{ 'section': true, 'firstSection': true, 'is-visible': isVisible, 'invisible': invisible }">
           <div class="columns is-centered">
             <div class="column is-5">
               <div class="columns is-8-desktop is-variable is-multiline pt-4">
@@ -54,7 +54,7 @@
         </section>
         <!-- End first question -->
         <!-- Show when on the second question -->
-        <section v-else-if="secondQuestion" :class="{ 'section': true, 'secondSection': true, 'show-on-scroll': true, 'is-visible': secondIsVisible, 'invisible': secondInvisible }">
+        <section v-else-if="secondQuestion" :class="{ 'section': true, 'secondSection': true, 'is-visible': secondIsVisible, 'invisible': secondInvisible }">
           <div class="columns is-centered">
             <div class="column is-5">
               <div class="columns is-8-desktop is-variable is-multiline pt-4">
@@ -105,7 +105,7 @@
           </div>
         </section>
         <!-- End second question -->
-        <section v-else-if="copyright" :class="{ 'section': true, 'copyrightSection': true, 'show-on-scroll': true, 'is-visible': copyrightIsVisible, 'invisible': copyrightInvisible }">
+        <section v-else-if="copyright" :class="{ 'section': true, 'copyrightSection': true, 'is-visible': copyrightIsVisible, 'invisible': copyrightInvisible }">
           <div class="columns is-centered">
             <div class="column is-5">
               <div class="columns is-8-desktop is-variable is-multiline pt-4">
@@ -147,7 +147,7 @@
           </div>
         </section>
         <!-- Show when on the third question -->
-        <section v-else-if="thirdQuestion" :class="{ 'section': true, 'thirdSection': true, 'show-on-scroll': true, 'is-visible': thirdIsVisible, 'invisible': thirdInvisible }">
+        <section v-else-if="thirdQuestion" :class="{ 'section': true, 'thirdSection': true, 'is-visible': thirdIsVisible, 'invisible': thirdInvisible }">
           <div class="columns is-centered">
             <div class="column is-5">
               <div class="columns is-8-desktop is-variable is-multiline pt-4">
@@ -186,7 +186,7 @@
           </div>
         </section>
         <!-- End third question -->
-        <section v-else :class="{ 'section': true, 'fourthSection': true, 'show-on-scroll': true, 'is-visible': fourthIsVisible, 'invisible': fourthInvisible }">
+        <section v-else-if="viewResult" :class="{ 'section': true, 'fourthSection': true, 'is-visible': fourthIsVisible, 'invisible': fourthInvisible }">
           <div class="columns is-centered">
             <div class="column is-5">
               <div class="columns is-8-desktop is-variable is-multiline pt-4">
@@ -439,26 +439,29 @@ export default {
           console.log("1 not set")
         }
       } else if (this.secondQuestion) {
-        const bread = this;
+        console.log("animating to firstQuestion");
         this.secondIsVisible = false;
-        console.log("this.2Visible: ", this.secondIsVisible);
         this.secondInvisible = true;
-        console.log("this.2invisible: ", this.secondInvisible);
+        const bread = this;
         setTimeout(function() {
           bread.secondQuestion = false;
+          bread.thirdQuestion = false;
+          bread.firstQuestion = true;
+          bread.invisible = false;
+          bread.isVisible = true;
           console.log("removed");
         }, 500)
-        this.firstQuestion = true;
-        this.isVisible = false;
-        this.invisible = false;
-        if (this.firstQuestion) {
-          setTimeout(function() {
-            bread.isVisible = true;
-            console.log("second");
-          }, 1000)
-        } else {
-          console.log("3 not set")
-        }
+        // this.firstQuestion = true;
+        // this.isVisible = false;
+        // this.invisible = false;
+        // if (this.firstQuestion) {
+        //   setTimeout(function() {
+        //     bread.isVisible = true;
+        //     console.log("second");
+        //   }, 1000)
+        // } else {
+        //   console.log("3 not set")
+        // }
       }
     },
 
@@ -483,6 +486,72 @@ export default {
           console.log("2 not set")
         }
       } else if (this.thirdQuestion) {
+        this.thirdIsVisible = false;
+        this.thirdInvisible = true;
+        // this.secondIsVisible = false;
+        // console.log("animating to second question");
+        const bread = this;
+        // this.thirdInvisible = true;
+        // this.thirdIsVisible = false;
+        setTimeout(function() {
+          bread.thirdQuestion = false;
+          bread.fourthQueston = false;
+          bread.secondQuestion = true;
+          bread.secondInvisible = false;
+          bread.secondIsVisible = true;
+          console.log("removed");
+        }, 500)
+        // this.secondQuestion = true;
+        // if (this.secondQuestion) {
+        // setTimeout(function() {
+
+        //   console.log("second is");
+        // }, 1000)
+        // } else {
+        //   console.log("4 not set")
+        // }
+      }
+    },
+
+    animateToThirdQuestion() {
+      if (this.secondQuestion) {
+        const bread = this;
+        this.secondIsVisible = false;
+        this.secondInvisible = true
+        setTimeout(function() {
+          bread.secondQuestion = false;
+          console.log("removed");
+        }, 500)
+        this.thirdQuestion = true;
+        this.thirdIsVisible = false;
+        this.thirdInvisible = false;
+        if (this.thirdQuestion) {
+          setTimeout(function() {
+            bread.thirdIsVisible = true;
+            console.log("second");
+          }, 1000)
+        } else {
+          console.log("3 not set")
+        }
+      } else if (this.viewResult) {
+        this.fourthIsVisible = false;
+        this.fourthInvisible = true;
+        const bread = this;
+
+        setTimeout(function() {
+          bread.viewResult = false;
+          bread.isShowingQuestion = true;
+          bread.thirdQuestion = true;
+          bread.thirdInvisible = false;
+          bread.thirdIsVisible = true;
+          // setTimeout(function() {
+          // }, 200)
+        }, 500)
+      }
+    },
+
+    animateToFourthSection() {
+      if (this.thirdQuestion) {
         const bread = this;
         this.thirdIsVisible = false;
         this.thirdInvisible = true;
@@ -490,59 +559,31 @@ export default {
           bread.thirdQuestion = false;
           console.log("removed");
         }, 500)
-        this.secondQuestion = true;
-        this.secondIsVisible = false;
-        this.secondInvisible = false;
+        this.viewResult = true;
+        this.fourthIsVisible = false;
+        this.fourthInvisible = false;
         if (this.viewResult) {
           setTimeout(function() {
-            bread.secondIsVisible = true;
-            console.log("second is");
+            bread.fourthIsVisible = true;
+            console.log("second");
           }, 1000)
         } else {
           console.log("4 not set")
         }
-      }
-    },
-
-    animateToThirdQuestion() {
-      const bread = this;
-      this.secondIsVisible = false;
-      this.secondInvisible = true
-      setTimeout(function() {
-        bread.secondQuestion = false;
-        console.log("removed");
-      }, 500)
-      this.thirdQuestion = true;
-      this.thirdIsVisible = false;
-      this.thirdInvisible = false;
-      if (this.thirdQuestion) {
+      } else if (!this.isShowingQuestion) {
+        console.log("fourth worketh")
+        this.formIsVisible = false;
+        this.formInvisible = true;
+        const bread = this;
         setTimeout(function() {
-          bread.thirdIsVisible = true;
-          console.log("second");
-        }, 1000)
-      } else {
-        console.log("3 not set")
-      }
-    },
-
-    animateToFourthSection() {
-      const bread = this;
-      this.thirdIsVisible = false;
-      this.thirdInvisible = true;
-      setTimeout(function() {
-        bread.thirdQuestion = false;
-        console.log("removed");
-      }, 500)
-      this.viewResult = true;
-      this.fourthIsVisible = false;
-      this.fourthInvisible = false;
-      if (this.viewResult) {
-        setTimeout(function() {
+          bread.isShowingQuestion = true; // actually setting it to false
+          bread.firstQuestion = false;
+          bread.viewResult = true;
           bread.fourthIsVisible = true;
-          console.log("second");
-        }, 1000)
-      } else {
-        console.log("4 not set")
+          setTimeout(function() {
+            bread.fourthInvisible = false;
+          }, 500)
+        }, 500)
       }
     },
 
@@ -553,37 +594,45 @@ export default {
         const bread = this;
         setTimeout(function() {
           bread.viewResult = false;
+          bread.isShowingQuestion = false;
+          bread.formIsVisible = true;
+          setTimeout(function() {
+            bread.formInvisible = false;
+          }, 200)
           console.log("fourth removed");
         }, 500)
-        this.isShowingQuestion = false;
-        this.formInvisible = false;
-        if (!this.isShowingQuestion === true) {
-          setTimeout(function() {
-            bread.formIsVisible = true;
-            console.log("form is visible");
-          }, 1000)
-        } else {
-          console.log("form not set")
-        }
+        // this.formInvisible = false;
+        // if (!this.isShowingQuestion === true) {
+        //   setTimeout(function() {
+        //     bread.formIsVisible = true;
+        //     console.log("form is visible");
+        //   }, 1000)
+        // } else {
+        //   console.log("form not set")
+        // }
       } else if (this.firstQuestion) {
-        const bread = this;
         this.isVisible = false;
         this.invisible = true;
+        const bread = this;
         setTimeout(function() {
           bread.firstQuestion = false;
+          bread.secondQuestion = false;
+          bread.isShowingQuestion = false; // actually true
+          bread.formIsVisible = true;
+          setTimeout(function() {
+            bread.formInvisible = false;
+          }, 200)
           console.log("removed");
         }, 500)
-        this.isShowingQuestion = false;
-        this.formInvisible = false;
-        this.formInvisible = false;
-        if (!this.isShowingQuestion === true) {
-          setTimeout(function() {
-            bread.formIsVisible = true;
-            console.log("second");
-          }, 1000)
-        } else {
-          console.log("form not set")
-        }
+
+        // if (!this.isShowingQuestion === true) {
+        //   setTimeout(function() {
+        //     bread.formIsVisible = true;
+        //     console.log("second");
+        //   }, 1000)
+        // } else {
+        //   console.log("form not set")
+        // }
       }
     },
 
@@ -638,33 +687,29 @@ export default {
     // scroll up through the questions
     scrollUp() {
       if (this.firstQuestion) {
-        this.firstQuestion = false;
-        this.isShowingQuestion = false;
+        this.animateToInfoform();
       } else if (this.secondQuestion) {
-        this.secondQuestion = false;
-        this.firstQuestion = true
+        this.animateToFirstQuestion(true);
       } else if (this.thirdQuestion) {
-        this.thirdQuestion = false;
-        this.secondQuestion = true
+        this.animateToSecondQuestion();
       } else if (!this.isShowingQuestion) {
-        this.thirdQuestion = true;
-        this.isShowingQuestion = true;
+        this.animateToFourthSection();
+      } else if (this.viewResult) {
+        this.animateToThirdQuestion();
       }
     },
 
     scrollDown() {
       if (!this.isShowingQuestion) {
-        this.isShowingQuestion = true;
-        this.firstQuestion = true;
+        this.animateToFirstQuestion(true);
       } else if (this.firstQuestion) {
-        this.firstQuestion = false;
-        this.secondQuestion = true;
+        this.animateToSecondQuestion();
       } else if (this.secondQuestion) {
-        this.secondQuestion = false;
-        this.thirdQuestion = true;
+        this.animateToThirdQuestion();
       } else if (this.thirdQuestion) {
-        this.thirdQuestion = false;
-        this.isShowingQuestion = false;
+        this.animateToFourthSection();
+      } else if (this.viewResult) {
+        this.animateToInfoform();
       }
     },
 
@@ -693,16 +738,13 @@ export default {
         if (this.firstQuestion) {
           this.animateToInfoform();
         } else if (this.secondQuestion) {
-          this.animateToFirstQuestion();
+          this.animateToFirstQuestion(true);
         } else if (this.thirdQuestion) {
-          this.thirdQuestion = false;
-          this.secondQuestion = true
+          this.animateToSecondQuestion();
         } else if (!this.isShowingQuestion) {
-          this.thirdQuestion = true;
-          this.isShowingQuestion = true;
+          this.animateToFourthSection();
         } else if (this.viewResult) {
-          this.viewResult = false;
-          this.thirdQuestion = true;
+          this.animateToThirdQuestion();
         }
       }
     },
@@ -737,6 +779,7 @@ export default {
 
   mounted() {
     const questions = document.querySelector("#questions");
+    questions.style.height = window.innerHeight + 'px';
     questions.addEventListener("wheel", _.debounce(this.mouseScroll, 100));
     const beans = this;
     setTimeout(function() {
@@ -754,9 +797,9 @@ p {
   font-family: "Mulish", sans-serif;
 }
 
-#questions {
+/*#questions {
   min-height: 80vh;
-}
+}*/
 
 .title-box {
   border: 1px solid #d6d6d6;
@@ -852,7 +895,7 @@ p {
   height: 40px;
   line-height: 44px;
   position: fixed;
-  right: 50px;
+  right: 20px;
   bottom: 20px;
   z-index: 999;
   font-size: 13px;
