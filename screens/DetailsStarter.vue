@@ -896,7 +896,7 @@ p {
   line-height: 44px;
   position: fixed;
   right: 20px;
-  bottom: 20px;
+  bottom: 30px;
   z-index: 999;
   font-size: 13px;
   color: #fff;
