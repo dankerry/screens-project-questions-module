@@ -310,7 +310,9 @@ export default {
 
       copyright: false,
 
-      scrolled: false
+      scrolled: false,
+
+      isUpdated: false
     };
   },
 
@@ -432,6 +434,7 @@ export default {
         if (this.firstQuestion) {
           setTimeout(function() {
             bread.isVisible = true;
+            bread.blurButton();
             console.log("foood");
           }, 1000)
         } else {
@@ -479,6 +482,7 @@ export default {
         if (this.secondQuestion) {
           setTimeout(function() {
             bread.secondIsVisible = true;
+            bread.blurButton();
             console.log("second");
           }, 1000)
         } else {
@@ -527,6 +531,7 @@ export default {
         if (this.thirdQuestion) {
           setTimeout(function() {
             bread.thirdIsVisible = true;
+            bread.blurButton();
             console.log("second");
           }, 1000)
         } else {
@@ -564,6 +569,7 @@ export default {
         if (this.viewResult) {
           setTimeout(function() {
             bread.fourthIsVisible = true;
+            bread.blurButton();
             console.log("second");
           }, 1000)
         } else {
@@ -773,6 +779,14 @@ export default {
         beans.formIsVisible = true
         beans.formInvisible = false;
       }, 1000)
+    },
+
+    blurButton() {
+      const btn = document.getElementsByClassName("button");
+      for (const val of btn) {
+        console.log("val: ", val);
+        val.blur();
+      }
     }
   },
 
@@ -784,7 +798,23 @@ export default {
     setTimeout(function() {
       beans.formIsVisible = true
     }, 1000)
-  }
+  },
+
+  // beforeUpdate() {
+  //   console.log("updated");
+  //   this.isUpdated = true;
+  // },
+
+  // updated() {
+  //   if (this.isUpdated) {
+  //     const btn = document.getElementsByClassName("button");
+  //     for (const val of btn) {
+  //       console.log("val: ", val);
+  //       // val.blur();
+  //     }
+  //     this.isUpdated = false;
+  //   }
+  // }
 };
 
 </script>
@@ -866,22 +896,24 @@ p {
   transition: opacity 2s 1s ease;
 }*/
 
+/*#a5ffc9*/
+
 .button.is-success.is-light {
   min-width: 100% !important;
   transition: all .3s ease 0s;
 }
 
-.button.is-success.is-light:focus,
+/*.button.is-success.is-light:focus,*/
 .button.is-success.is-light:active {
-  background-color: #effaf3 !important;
-  color: #257942 !important;
-  border-color: #48c774 !important;
+  background-color: #a5ffc9 !important;
+  /*color: #257942 !important;*/
+  /*border-color: #48c774 !important;*/
 }
 
-.button.is-success:focus:not(:active) {
+/*.button.is-success:focus:not(:active) {
   box-shadow: none !important;
 }
-
+*/
 .button.is-success.is-light:hover {
   box-shadow: 3px 4px 7px rgba(0, 0, 0, 0.21);
   transform: translateY(-2px);
@@ -928,8 +960,8 @@ p {
   height: 40px;
   line-height: 44px;
   position: fixed;
-  right: 20px;
-  top: 20px;
+  right: 0;
+  top: 0;
   z-index: 999;
   color: #fff;
   text-align: center;
@@ -953,7 +985,7 @@ p {
 
 @media (max-width: 766px) {
   .scroll-top {
-    right: 20px;
+    right: 5px;
   }
 }
 
