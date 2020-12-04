@@ -233,7 +233,6 @@
       </div>
       <!-- Cancel button -->
       <div class="scroll-btn is-hidden-desktop" style="display: block;">
-        <span>Youreadfor.me</span>
         <i @click="scrollUp" class="fas fa-angle-up"></i>
         <i @click="scrollDown" class="fas fa-angle-down"></i>
       </div>
@@ -874,7 +873,13 @@ p {
 
 .button.is-success.is-light:focus,
 .button.is-success.is-light:active {
-  background-color: #a5ffc9 !important;
+  background-color: #effaf3 !important;
+  color: #257942 !important;
+  border-color: #48c774 !important;
+}
+
+.button.is-success:focus:not(:active) {
+  box-shadow: none !important;
 }
 
 .button.is-success.is-light:hover {
@@ -884,8 +889,13 @@ p {
 
 .fa-angle-up,
 .fa-angle-down {
-  margin-left: 10px;
   cursor: pointer;
+  font-size: 20px;
+  padding-top: 10px;
+}
+
+.fa-angle-down {
+  margin-left: 30px;
 }
 
 .scroll-btn {
@@ -899,11 +909,12 @@ p {
   bottom: 30px;
   z-index: 999;
   font-size: 13px;
-  color: #fff;
+  color: #00947e;
   text-align: center;
   text-decoration: none;
   display: none;
-  background: #000000;
+  background: #ebfffc;
+  border: 1px solid #00947e;
   border-radius: 3px;
   -webkit-box-shadow: 0 2px 15px rgba(0, 0, 0, 0.25);
   box-shadow: 0 2px 15px rgba(0, 0, 0, 0.25);
@@ -917,10 +928,9 @@ p {
   height: 40px;
   line-height: 44px;
   position: fixed;
-  right: 50px;
-  top: 50px;
+  right: 20px;
+  top: 20px;
   z-index: 999;
-  font-size: 15px;
   color: #fff;
   text-align: center;
   text-decoration: none;
