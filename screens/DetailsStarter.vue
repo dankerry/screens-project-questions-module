@@ -962,8 +962,8 @@ p {
   height: 40px;
   line-height: 44px;
   position: fixed;
-  right: 20px;
-  bottom: 30px;
+  right: 9px;
+  bottom: 15px;
   z-index: 999;
   font-size: 13px;
   color: #00947e;
