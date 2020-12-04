@@ -391,6 +391,29 @@ export default {
         this.option = this.options[0].offer;
         this.linkText = this.options[0].button1;
         this.location = this.options[0].location;
+      } else if (this.questions[0].answer === "no" &&
+        this.questions[1].answer === "no" &&
+        value === "pick a reader") {
+        console.log("GO TO DEMAND CHOOSER");
+        this.animateToFourthSection();
+        this.option = this.options[2].demandChooser;
+        this.linkText = this.options[2].button1;
+        this.location = this.options[2].location;
+      } else if (this.questions[0].answer === "yes" &&
+        this.questions[1].answer === "no" &&
+        value === "read it myself") {
+        console.log("GO TO NEWV");
+        this.animateToFourthSection();
+        this.option = this.options[3].newv;
+        this.linkText = this.options[3].button1;
+        this.location = this.options[3].location;
+      } else if (this.questions[0].answer === "no" &&
+        this.questions[1].answer === "yes" &&
+        value === "read it myself") {
+        this.animateToFourthSection();
+        this.option = this.options[0].offer;
+        this.linkText = this.options[0].button1;
+        this.location = this.options[0].location;
       }
     },
 
