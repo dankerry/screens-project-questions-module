@@ -937,9 +937,9 @@ p {
   cursor: pointer;
 }
 
-.scroll-top:hover {
+/*.scroll-top:hover {
   transform: rotateZ(90deg);
-}
+}*/
 
 @media (max-width: 766px) {
   .scroll-top {
