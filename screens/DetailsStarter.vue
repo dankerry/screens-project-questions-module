@@ -411,6 +411,7 @@ export default {
       if (this.thirdQuestion) {
         setTimeout(function() {
           bread.thirdIsVisible = true;
+          bread.blurButton();
           console.log("second");
         }, 1000)
       } else {
@@ -674,6 +675,7 @@ export default {
       if (this.copyright) {
         setTimeout(function() {
           bread.copyrightIsVisible = true;
+          bread.blurButton()
           console.log("copy");
         }, 1000)
       }
