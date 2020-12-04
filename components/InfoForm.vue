@@ -14,7 +14,17 @@
         </div>
       </div>
     </div>
-    <div v-if="name !== ''" class="columns is-centered">
+    <div v-if="name !== ''" class="columns is-centered is-hidden-mobile">
+      <div class="column is-7">
+        <button @click="showQuestions" class="button is-primary is-outlined is-light">
+          <span>OK</span>
+          <span class="icon is-small">
+            <i class="fas fa-check"></i>
+          </span>
+        </button>
+      </div>
+    </div>
+    <div class="columns is-centered is-hidden-desktop is-hidden-tablet">
       <div class="column is-7">
         <button @click="showQuestions" class="button is-primary is-outlined is-light">
           <span>OK</span>
