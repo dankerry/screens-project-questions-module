@@ -256,9 +256,9 @@ export default {
       ],
 
       options: [
-        { offer: "You can create an OFFER. An Offer lets you create a request on the marketplace and pic the best readr for you.", button1: "Create OFFER now", button2: "Restart Assistant", location: "https://trello.com/c/V9V80ck8" },
-        { selfPublish: "You can create an initiative. An initiative lets you record the audiobook yourself and sell it on Youreadfor.me.", button1: "Create initiative", button2: "Restart Assistant", location: "https://www.figma.com/file/QsXEGiic6oijuiWKDvOCSohh/Youreadfor.me?node-id=620%3A15" },
-        { demandChooser: "You can create a demand. A demand lets you request a  Readr without copyright. Youreadfor.me handles it for you.", button1: "Create Demand now", button2: "Restart Assistant", location: "#" },
+        { offer: "You can create an OFFER. An Offer lets you create a request on the marketplace and pick the best readr for you.", button1: "Create OFFER now", button2: "Restart Assistant", location: "https://trello.com/c/V9V80ck8" },
+        { selfPublish: "You can create an Initiative. An Initiative lets you record the audiobook yourself and sell it on Youreadfor.me.", button1: "Create initiative", button2: "Restart Assistant", location: "https://www.figma.com/file/QsXEGiic6oijuiWKDvOCSohh/Youreadfor.me?node-id=620%3A15" },
+        { demandChooser: "You can create a Demand. A Demand lets you request a  Readr without copyright. Youreadfor.me handles it for you.", button1: "Create Demand now", button2: "Restart Assistant", location: "#" },
         { newv: "You can create a NEWV. A New Version is the Readr reinterpretation of an existing Audiobook. Have it your way.", button1: "Create NEWV now", button2: "Restart Assistant", location: "#" }
       ],
 
