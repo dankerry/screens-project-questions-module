@@ -932,16 +932,21 @@ p {
 .button.is-success.is-light:active {
   background-color: #a5ffc9 !important;
   /*color: #257942 !important;*/
-  /*border-color: #48c774 !important;*/
+}
+
+.button.is-success.is-light:hover {
+  border-color: #48c774 !important;
 }
 
 /*.button.is-success:focus:not(:active) {
   box-shadow: none !important;
 }
 */
-.button.is-success.is-light:hover {
-  box-shadow: 3px 4px 7px rgba(0, 0, 0, 0.21);
-  transform: translateY(-2px);
+@media (min-width: 990px) {
+  .button.is-success.is-light:hover {
+    box-shadow: 3px 4px 7px rgba(0, 0, 0, 0.21);
+    transform: translateY(-2px);
+  }
 }
 
 .fa-angle-up,
