@@ -934,8 +934,10 @@ p {
   /*color: #257942 !important;*/
 }
 
-.button.is-success.is-light:hover {
-  border-color: #48c774 !important;
+@media (max-width: 889px) {
+  .button.is-success.is-light:hover {
+    border-color: #48c774 !important;
+  }
 }
 
 /*.button.is-success:focus:not(:active) {
