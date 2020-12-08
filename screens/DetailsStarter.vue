@@ -8,9 +8,6 @@
       </div>
       <!-- End cancel button -->
       <div class="container">
-        <!-- <div class="columns is-vcentered is-centered"> -->
-        <!-- <div class="column is-12"> -->
-        <!-- <transition name="fade"> -->
         <!-- Show form  -->
         <InfoForm :class="{ 'theform': true, 'form-isVisible': formIsVisible, 'form-invisible': formInvisible }" v-if="!isShowingQuestion" @displayQuestions="showQuestions($event)" />
         <!-- Show when on the first question -->
@@ -105,6 +102,7 @@
           </div>
         </section>
         <!-- End second question -->
+        <!-- What is a copyright -->
         <section v-else-if="copyright" :class="{ 'section': true, 'copyrightSection': true, 'is-visible': copyrightIsVisible, 'invisible': copyrightInvisible }">
           <div class="columns is-centered">
             <div class="column is-5">
@@ -146,6 +144,7 @@
             </div>
           </div>
         </section>
+        <!-- End what is a copyright -->
         <!-- Show when on the third question -->
         <section v-else-if="thirdQuestion" :class="{ 'section': true, 'thirdSection': true, 'is-visible': thirdIsVisible, 'invisible': thirdInvisible }">
           <div class="columns is-centered">
@@ -186,6 +185,7 @@
           </div>
         </section>
         <!-- End third question -->
+        <!-- Result screen -->
         <section v-else-if="viewResult" :class="{ 'section': true, 'fourthSection': true, 'is-visible': fourthIsVisible, 'invisible': fourthInvisible }">
           <div class="columns is-centered">
             <div class="column is-5">
@@ -227,16 +227,14 @@
             </div>
           </div>
         </section>
-        <!-- </transition> -->
-        <!-- </div> -->
-        <!-- </div> -->
+        <!-- End result Screen -->
       </div>
-      <!-- Cancel button -->
+      <!-- Navigator: shows on mobile only -->
       <div class="scroll-btn is-hidden-desktop" style="display: block;">
         <i @click="scrollUp" class="fas fa-angle-up"></i>
         <i @click="scrollDown" class="fas fa-angle-down"></i>
       </div>
-      <!-- End cancel button -->
+      <!-- End navigator -->
     </div>
   </div>
   <!-- end questions sections -->
@@ -255,6 +253,7 @@ export default {
         },
       ],
 
+      // array holding possible results
       options: [
         { offer: "You can create an OFFER. An Offer lets you create a request on the marketplace and pick the best Readr for you.", button1: "Create OFFER now", button2: "Restart Assistant", location: "https://trello.com/c/V9V80ck8" },
         { selfPublish: "You can create an Initiative. An Initiative lets you record the audiobook yourself and sell it on Youreadfor.me.", button1: "Create initiative", button2: "Restart Assistant", location: "https://www.figma.com/file/QsXEGiic6oijuiWKDvOCSohh/Youreadfor.me?node-id=620%3A15" },
@@ -262,36 +261,52 @@ export default {
         { newv: "You can create a NEWV. A New Version is the Readr reinterpretation of an existing Audiobook. Have it your way.", button1: "Create NEWV now", button2: "Restart Assistant", location: "#" }
       ],
 
+      // toggles the is-visible class for the first question 
       isVisible: false,
 
+      // toggles the invisible class for the first question
       invisible: false,
 
+      // toggles the form-isvisible class for the form
       formIsVisible: false,
 
+      // toggles the form-invisible class form the form
       formInvisible: false,
 
+      // toggles the is-visible class for the second question 
       secondIsVisible: false,
 
+      // toggles the invisible class for the second question
       secondInvisible: false,
 
+      // toggles the is-visible class for the third question 
       thirdIsVisible: false,
 
+      // toggles the invisible class for the third question
       thirdInvisible: false,
 
+      // toggles the is-visible class for the result section
       fourthIsVisible: false,
 
+      // toggles the invisible class for the result section
       fourthInvisible: false,
 
+      // toggles the is-visible class for the copyright section
       copyrightIsVisible: false,
 
+      // toggles the invisible class for the copyright section
       copyrightInvisible: false,
 
+      // option value depending on the answers chosen
       option: "",
 
+      // button value depending on the answers chosen
       linkText: "",
 
+      // href depending on the answers chosen
       location: "",
 
+      // name of the user entered into the form
       name: "",
 
       // shows info form when false
@@ -306,13 +321,11 @@ export default {
       // show third question when true
       thirdQuestion: false,
 
+      // shows the result section if true
       viewResult: false,
 
+      // shows the copyright section if true
       copyright: false,
-
-      scrolled: false,
-
-      isUpdated: false
     };
   },
 
@@ -345,7 +358,6 @@ export default {
         this.questions[1].answer === "yes" &&
         value === "pick a reader"
       ) {
-        // window.location.href = "https://trello.com/c/V9V80ck8";
         this.animateToFourthSection();
         this.option = this.options[0].offer;
         this.linkText = this.options[0].button1;
@@ -355,8 +367,6 @@ export default {
         this.questions[1].answer === "yes" &&
         value === "read it myself"
       ) {
-        // window.location.href =
-        // "https://www.figma.com/file/QsXEGiic6oijuiWKDvOCSohh/Youreadfor.me?node-id=620%3A15";
         this.animateToFourthSection();
         this.option = this.options[1].selfPublish;
         this.linkText = this.options[1].button1;
@@ -386,7 +396,6 @@ export default {
         this.questions[1].answer === "yes" &&
         value === "pick a reader"
       ) {
-        // window.location.href = "https://trello.com/c/V9V80ck8";
         this.animateToFourthSection();
         this.option = this.options[0].offer;
         this.linkText = this.options[0].button1;
@@ -477,17 +486,6 @@ export default {
           bread.isVisible = true;
           console.log("removed");
         }, 500)
-        // this.firstQuestion = true;
-        // this.isVisible = false;
-        // this.invisible = false;
-        // if (this.firstQuestion) {
-        //   setTimeout(function() {
-        //     bread.isVisible = true;
-        //     console.log("second");
-        //   }, 1000)
-        // } else {
-        //   console.log("3 not set")
-        // }
       }
     },
 
@@ -515,11 +513,7 @@ export default {
       } else if (this.thirdQuestion) {
         this.thirdIsVisible = false;
         this.thirdInvisible = true;
-        // this.secondIsVisible = false;
-        // console.log("animating to second question");
         const bread = this;
-        // this.thirdInvisible = true;
-        // this.thirdIsVisible = false;
         setTimeout(function() {
           bread.thirdQuestion = false;
           bread.fourthQueston = false;
@@ -528,15 +522,6 @@ export default {
           bread.secondIsVisible = true;
           console.log("removed");
         }, 500)
-        // this.secondQuestion = true;
-        // if (this.secondQuestion) {
-        // setTimeout(function() {
-
-        //   console.log("second is");
-        // }, 1000)
-        // } else {
-        //   console.log("4 not set")
-        // }
       }
     },
 
@@ -572,8 +557,6 @@ export default {
           bread.thirdQuestion = true;
           bread.thirdInvisible = false;
           bread.thirdIsVisible = true;
-          // setTimeout(function() {
-          // }, 200)
         }, 500)
       }
     },
@@ -630,15 +613,6 @@ export default {
           }, 200)
           console.log("fourth removed");
         }, 500)
-        // this.formInvisible = false;
-        // if (!this.isShowingQuestion === true) {
-        //   setTimeout(function() {
-        //     bread.formIsVisible = true;
-        //     console.log("form is visible");
-        //   }, 1000)
-        // } else {
-        //   console.log("form not set")
-        // }
       } else if (this.firstQuestion) {
         this.isVisible = false;
         this.invisible = true;
@@ -653,15 +627,6 @@ export default {
           }, 200)
           console.log("removed");
         }, 500)
-
-        // if (!this.isShowingQuestion === true) {
-        //   setTimeout(function() {
-        //     bread.formIsVisible = true;
-        //     console.log("second");
-        //   }, 1000)
-        // } else {
-        //   console.log("form not set")
-        // }
       }
     },
 
@@ -707,14 +672,10 @@ export default {
     // display the first question
     showQuestions({ displayStatus, name }) {
       this.animateToFirstQuestion(displayStatus);
-      // if (this.firstQuestion) {
-      //  document.querySelector(".firstSection").classList.add("is-visible");
-      //  console.log("beans");
-      // }
       this.name = name;
     },
 
-    // scroll up through the questions
+    // scroll up through the questions when the angle-up navigator button is clicked
     scrollUp() {
       if (this.firstQuestion) {
         this.animateToInfoform();
@@ -729,6 +690,7 @@ export default {
       }
     },
 
+    // scroll down through the questions when the angle-down navigator button is clicked
     scrollDown() {
       if (!this.isShowingQuestion) {
         this.animateToFirstQuestion(true);
@@ -743,10 +705,8 @@ export default {
       }
     },
 
-    // scroll down thriugh the questions
     mouseScroll(e) {
-      // console.log("beanas: ", e)
-      if (e.deltaY < 0) {
+      if (e.deltaY < 0) { // mouse scroll down through the questions
         if (!this.isShowingQuestion) {
           this.animateToFirstQuestion(true);
 
@@ -764,7 +724,7 @@ export default {
 
         }
         console.log("times");
-      } else if (e.deltaY > 0) {
+      } else if (e.deltaY > 0) { // mouse scroll up through the questions
         if (this.firstQuestion) {
           this.animateToInfoform();
         } else if (this.secondQuestion) {
@@ -780,7 +740,7 @@ export default {
     },
 
     cancel() {
-      console.log("go back");
+      // when the X icon is clicked, show the form
       this.isShowingQuestion = false;
       this.firstQuestion = false;
       this.secondQuestion = false;
@@ -806,10 +766,10 @@ export default {
       }, 1000)
     },
 
+    // set the state of buttons to blur when a new section comes up
     blurButton() {
       const btn = document.getElementsByClassName("button");
       for (const val of btn) {
-        console.log("val: ", val);
         val.blur();
       }
     }
@@ -823,23 +783,7 @@ export default {
     setTimeout(function() {
       beans.formIsVisible = true
     }, 1000)
-  },
-
-  // beforeUpdate() {
-  //   console.log("updated");
-  //   this.isUpdated = true;
-  // },
-
-  // updated() {
-  //   if (this.isUpdated) {
-  //     const btn = document.getElementsByClassName("button");
-  //     for (const val of btn) {
-  //       console.log("val: ", val);
-  //       // val.blur();
-  //     }
-  //     this.isUpdated = false;
-  //   }
-  // }
+  }
 };
 
 </script>
@@ -948,6 +892,7 @@ p {
   .button.is-success.is-light:hover {
     box-shadow: 3px 4px 7px rgba(0, 0, 0, 0.21);
     transform: translateY(-2px);
+    background-color: #a5ffc9 !important;
   }
 }
 
